@@ -17,7 +17,7 @@
  */
 const TESTING = false
 const RPC_SERVICE = TESTING ? 'http://127.0.0.1:8545' : 'http://localhost:8545'
-const CHAIN_ID = TESTING ? 1234 : 18
+const CHAIN_ID = TESTING ? 1234 : 15
 const SERVER_PORT = 9520 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
