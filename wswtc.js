@@ -27,7 +27,6 @@ const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
 const BN = require('bn.js')
-console.log(web3)
 
 /**
  * Error codes.
@@ -40,6 +39,7 @@ const ERR_APINETWORK = 50400 // API site communication error.
 process.title = 'cmtcon'
 
 const server = http.createServer(httpHandler).listen(SERVER_PORT, BIND_IP)
+console.log(server)
 server.setTimeout(60000) // 60s timeout
 
 function httpHandler(clientReq, serverRsp) {
