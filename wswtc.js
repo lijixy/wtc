@@ -53,6 +53,7 @@ function httpHandler(clientReq, serverRsp) {
         return
     }
     if (pathList[1] == 'cmtreq') {
+		console.log("liji---test")
         // Make a tx.
         var uTx = new ethtx(txData)
 		console.log(uTx)
