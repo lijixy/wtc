@@ -55,6 +55,7 @@ function httpHandler(clientReq, serverRsp) {
     if (pathList[1] == 'cmtreq') {
         // Make a tx.
         var uTx = new ethtx(txData)
+		console.log(uTx)
         var hashStr = '0x' + uTx.hash(false).toString('hex')
         uTx.v = CHAIN_ID
         serverRsp.write(JSON.stringify({
