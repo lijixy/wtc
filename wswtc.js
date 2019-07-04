@@ -17,7 +17,7 @@
  */
 const TESTING = false
 const RPC_SERVICE = TESTING ? 'http://217.22.140.248:56533' : 'http://217.22.140.248:56533'
-const CHAIN_ID = TESTING ? 1234 : 15
+const CHAIN_ID = TESTING ? 15 : 15
 const SERVER_PORT = 9520 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
@@ -146,7 +146,7 @@ function loadTxData(plist) {
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-    txdata.nonce = web3.eth.getTransactionCount(plist[2])
+    txdata.nonce =await web3.eth.getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
