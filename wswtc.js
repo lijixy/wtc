@@ -27,6 +27,7 @@ const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
 const BN = require('bn.js')
+console.log(web3)
 
 /**
  * Error codes.
