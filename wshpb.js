@@ -16,7 +16,7 @@
  * Configurables.
  */
 const TESTING = false
-const RPC_SERVICE = TESTING ? 'http://mainnet.hpb.io/' : 'http://mainnet.hpb.io/'
+const RPC_SERVICE = TESTING ? 'http://mainnet.hpb.io/HpbBallot/static/web3hpb' : 'http://mainnet.hpb.io/HpbBallot/static/web3hpb'
 const CHAIN_ID = TESTING ? 269 : 269
 const SERVER_PORT = 8545 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
@@ -149,7 +149,7 @@ async function loadTxData(plist) {
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-    txdata.nonce = await web3.hpb_getTransactionCount(plist[2])
+    txdata.nonce = await web3.hpb.hpb_getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
