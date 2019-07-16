@@ -21,7 +21,8 @@ const CHAIN_ID = TESTING ? 269 : 269
 const SERVER_PORT = 8545 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
-var web3_hpb = require('web3_hpb/dist/web3_hpb.js');
+
+var web3_hpb = require('./lib/web3_hpb.js');
 var web3 = new web3_hpb();
 
 web3.setProvider(new web3.providers.HttpProvider(RPC_SERVICE));
@@ -148,7 +149,7 @@ async function loadTxData(plist) {
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-    txdata.nonce = await web3.hpb.hpb_getTransactionCount(plist[2])
+    txdata.nonce = await web3.hpb_getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
