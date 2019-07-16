@@ -16,7 +16,7 @@
  * Configurables.
  */
 const TESTING = false
-const RPC_SERVICE = TESTING ? 'http://mainnet.hpb.io/HpbBallot/static/web3hpb' : 'http://mainnet.hpb.io/HpbBallot/static/web3hpb'
+const RPC_SERVICE = TESTING ? 'http://mainnet.hpb.io' : 'http://mainnet.hpb.io'
 const CHAIN_ID = TESTING ? 269 : 269
 const SERVER_PORT = 8545 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
