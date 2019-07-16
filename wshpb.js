@@ -23,9 +23,9 @@ const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
 
 var web3_hpb = require('./lib/web3_hpb.js');
-var web3 = new web3_hpb();
+var web3_hpb = new web3_hpb();
 
-web3.setProvider(new web3.providers.HttpProvider(RPC_SERVICE));
+web3_hpb.setProvider(new web3_hpb.providers.HttpProvider(RPC_SERVICE));
 const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
@@ -149,7 +149,7 @@ async function loadTxData(plist) {
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-    txdata.nonce = await web3.hpb.hpb_getTransactionCount(plist[2])
+    txdata.nonce = await web3_hpb.hpb.hpb_getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
