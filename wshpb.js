@@ -21,7 +21,7 @@ const CHAIN_ID = TESTING ? 269 : 269
 const SERVER_PORT = 8545 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
-const Web3 = require("web3")
+const Web3 = require("web3-hpb")
 const web3 = new Web3(new Web3.providers.HttpProvider(RPC_SERVICE))
 const ethtx = require('ethereumjs-tx')
 const http = require('http')
