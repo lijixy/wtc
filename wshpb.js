@@ -62,7 +62,7 @@ function httpHandler(clientReq, serverRsp) {
         badRequest(serverRsp)
         return
     }
-    if (pathList[1] == 'cmtreq') {
+    if (pathList[1] == 'hpbreq') {
 		console.log("liji---test")
         // Make a tx.
         var uTx = new ethtx(txData)
@@ -76,7 +76,7 @@ function httpHandler(clientReq, serverRsp) {
         }, null, 2))
         serverRsp.statusCode = 200
         serverRsp.end()
-    } else if (pathList[1] == 'cmtsend') {
+    } else if (pathList[1] == 'hpbsend') {
         // Send a tx with signature.
         var sTx = new ethtx(txData)
         var sTxStr = '0x' + sTx.serialize().toString('hex')
@@ -146,7 +146,7 @@ async function loadTxData(plist) {
         return true
     }
 
-    if (plist[1] != 'cmtreq' && plist[1] != 'cmtsend') return null
+    if (plist[1] != 'hpbreq' && plist[1] != 'hpbsend') return null
     if (plist.length < 6) return null
 
     var txdata = {
@@ -167,7 +167,7 @@ async function loadTxData(plist) {
     } catch (e) {
         return null
     }
-    if (plist[1] == 'cmtsend') {
+    if (plist[1] == 'hpbsend') {
         if (plist.length != 9) return null
         txdata.r = plist[6]
         txdata.s = plist[7]
