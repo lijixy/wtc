@@ -151,7 +151,7 @@ async function loadTxData(plist) {
 
     var txdata = {
         chainId: CHAIN_ID,
-        gasLimit: 100000000,
+        gasLimit: '0x' + big.toString(100000000),
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
