@@ -27,7 +27,7 @@ var web3_hpb = new web3_hpb();
 
 web3_hpb.setProvider(new web3_hpb.providers.HttpProvider(RPC_SERVICE));
 var balanceInfo=web3_hpb.hpb.getBalance("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d854")
-console.log(balanceInfo)
+console.log(balanceInfo.toString(10))
 const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
