@@ -30,6 +30,8 @@ var balanceInfo=web3_hpb.hpb.getBalance("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d
 console.log(balanceInfo.toString(10))
 var nonceInfo=web3_hpb.hpb.getTransactionCount("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d854")
 console.log(nonceInfo)
+
+
 const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
@@ -154,7 +156,7 @@ async function loadTxData(plist) {
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
 	console.log(plist[2])
-    txdata.nonce = await web3_hpb.hpb.getTransactionCount(plist[2])
+    txdata.nonce = web3_hpb.hpb.getTransactionCount(plist[2])
 	console.log(txdata.nonce)
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
