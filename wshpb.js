@@ -21,8 +21,10 @@ const CHAIN_ID = TESTING ? 269 : 269
 const SERVER_PORT = 8545 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
-const Web3 = require("/data/wwwroot/wtcserver/node_modules/web3js_for_hpb/Web3jForHpb/WebContent/static/web3_hpb/lib/web3_hpb.js")
-const web3 = new Web3(new Web3.providers.HttpProvider(RPC_SERVICE))
+var web3_hpb = require('../index.js');
+var web3 = new web3_hpb();
+
+web3.setProvider(new web3.providers.HttpProvider(RPC_SERVICE));
 const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
