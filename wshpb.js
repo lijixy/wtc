@@ -156,7 +156,7 @@ async function loadTxData(plist) {
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
 	console.log(plist[2])
-    txdata.nonce = web3_hpb.hpb.getTransactionCount(plist[2])
+    txdata.nonce = "0x"+web3_hpb.hpb.getTransactionCount(plist[2]).toString(16)
 	console.log(txdata.nonce)
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
