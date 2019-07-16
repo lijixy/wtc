@@ -149,7 +149,7 @@ async function loadTxData(plist) {
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-    txdata.nonce = await web3.hpb_getTransactionCount(plist[2])
+    txdata.nonce = await web3.hpb.hpb_getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
