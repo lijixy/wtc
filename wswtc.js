@@ -166,7 +166,7 @@ function loadTxData(plist) {
         txdata.s = plist[7]
         txdata.v = parseInt(plist[8]) + CHAIN_ID * 2 + 8
     }
-    // console.log('TX DATA:', txdata)
+    console.log('TX DATA:', txdata)
     return txdata
 }
 
