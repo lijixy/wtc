@@ -141,7 +141,7 @@ function loadTxData(plist) {
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
 	var promisenonce = Promise.resolve(web3.eth.getTransactionCount(plist[2]));
-	promiseNonce().then(function(value){
+	promiseNonce(promisenonce).then(function(value){
 		console.log(value)
 		txdata.nonce=value
 	})
@@ -166,7 +166,7 @@ function loadTxData(plist) {
     return txdata
 }
 
-function promiseNonce() { 
+function promiseNonce(promisenonce) { 
   return promisenonce.then(function(value) {
       return Promise.resolve(value);
   })
