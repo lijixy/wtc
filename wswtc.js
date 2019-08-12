@@ -47,7 +47,7 @@ function httpHandler(clientReq, serverRsp) {
         badRequest(serverRsp)
         return
     }
-    if (pathList[1] == 'wtctreq') {
+    if (pathList[1] == 'wtcreq') {
 		console.log("liji---test")
         // Make a tx.
         var uTx = new ethtx(txData)
