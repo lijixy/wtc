@@ -140,7 +140,13 @@ function loadTxData(plist) {
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-    txdata.nonce = web3.eth.getTransactionCount(plist[2])
+	var promisenonce = Promise.resolve(web3.eth.getTransactionCount(plist[2]));
+	promiseNonce().then(function(value){
+		console.log(value)
+		txdata.nonce=value
+	})
+	
+    //txdata.nonce = web3.eth.getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
@@ -160,6 +166,11 @@ function loadTxData(plist) {
     return txdata
 }
 
+function promiseNonce() { 
+  return promise1.then(function(value) {
+      return Promise.resolve(value);
+  })
+}
 
 const Hexstring2btye = (str)=> {
     let pos = 0;
