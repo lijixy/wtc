@@ -161,7 +161,7 @@ function loadTxData(plist) {
         return null
     }
     if (plist[1] == 'wtcsend') {
-        if (plist.length != 9) return null
+        if (plist.length != 10) return null
         txdata.r = plist[6]
         txdata.s = plist[7]
         txdata.v = parseInt(plist[8]) + CHAIN_ID * 2 + 8
