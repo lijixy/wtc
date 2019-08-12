@@ -64,6 +64,8 @@ function httpHandler(clientReq, serverRsp) {
     } else if (pathList[1] == 'wtcsend') {
         // Send a tx with signature.
         var sTx = new ethtx(txData)
+		console.log("lijitest--sendWTC")
+		console.log(sTx)
         var sTxStr = '0x' + sTx.serialize().toString('hex')
         web3.eth.sendRawTransaction(sTxStr, (err, hash) => {
             if (!err) {
