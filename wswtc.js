@@ -136,7 +136,7 @@ function loadTxData(plist) {
 
     var txdata = {
         chainId: CHAIN_ID,
-        gasLimit: 21000,
+        gasLimit: 300000,
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
