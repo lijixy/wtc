@@ -167,7 +167,7 @@ function loadTxData(plist) {
 }
 
 function promiseNonce() { 
-  return promise1.then(function(value) {
+  return promisenonce.then(function(value) {
       return Promise.resolve(value);
   })
 }
