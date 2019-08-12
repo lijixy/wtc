@@ -67,7 +67,7 @@ function httpHandler(clientReq, serverRsp) {
 		console.log("lijitest--sendWTC")
 		console.log(sTx)
         var sTxStr = '0x' + sTx.serialize().toString('hex')
-        web3.eth.sendRawTransaction(sTxStr, (err, hash) => {
+        web3.eth.sendSignedTransaction(sTxStr, (err, hash) => {
             if (!err) {
                 // Success.
                 console.log(new Date().toISOString(), '[TX ID]', hash)
