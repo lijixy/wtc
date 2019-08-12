@@ -153,7 +153,7 @@ function loadTxData(plist) {
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
 	console.log("lijitest--get--loadData")
-	console.txData
+	console.log(txData)
     try {
         var big = new BN(plist[5], 10)
         txdata.value = '0x' + big.toString(16)
