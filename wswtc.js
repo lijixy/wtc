@@ -1,13 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Ellipal CyberMiles Connector
- * 
- * Ling LI <ling.li@ellipal.com>
- * 
- * ChangeLog
- * 20181109: Functional on mainnet.
- * 20181107: Functional on private testnet.
+ * Ellipal
  */
 
 'use strict'
@@ -36,7 +30,7 @@ const ERR_OVERSPENDING = 40200 // user's balance is insufficient for the transac
 const ERR_APIDATA = 50300 // API returned unparseable message.
 const ERR_APINETWORK = 50400 // API site communication error.
 
-process.title = 'cmtcon'
+process.title = 'wtccon'
 
 const server = http.createServer(httpHandler).listen(SERVER_PORT, BIND_IP)
 console.log(server)
@@ -53,7 +47,7 @@ function httpHandler(clientReq, serverRsp) {
         badRequest(serverRsp)
         return
     }
-    if (pathList[1] == 'cmtreq') {
+    if (pathList[1] == 'wtctreq') {
 		console.log("liji---test")
         // Make a tx.
         var uTx = new ethtx(txData)
@@ -67,7 +61,7 @@ function httpHandler(clientReq, serverRsp) {
         }, null, 2))
         serverRsp.statusCode = 200
         serverRsp.end()
-    } else if (pathList[1] == 'cmtsend') {
+    } else if (pathList[1] == 'wtcsend') {
         // Send a tx with signature.
         var sTx = new ethtx(txData)
         var sTxStr = '0x' + sTx.serialize().toString('hex')
@@ -122,7 +116,7 @@ function errorReport(rsp, code) {
     rsp.end()
 }
 
-async function loadTxData(plist) {
+function loadTxData(plist) {
     /**
      * Address string must start with '0x' and decodes to 20 bytes.
      */
@@ -137,7 +131,7 @@ async function loadTxData(plist) {
         return true
     }
 
-    if (plist[1] != 'cmtreq' && plist[1] != 'cmtsend') return null
+    if (plist[1] != 'wtcreq' && plist[1] != 'wtcsend') return null
     if (plist.length < 6) return null
 
     var txdata = {
@@ -146,7 +140,7 @@ async function loadTxData(plist) {
     }
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-    txdata.nonce = await web3.eth.getTransactionCount(plist[2])
+    txdata.nonce = web3.eth.getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
@@ -156,7 +150,7 @@ async function loadTxData(plist) {
     } catch (e) {
         return null
     }
-    if (plist[1] == 'cmtsend') {
+    if (plist[1] == 'wtcsend') {
         if (plist.length != 9) return null
         txdata.r = plist[6]
         txdata.s = plist[7]
