@@ -152,6 +152,8 @@ function loadTxData(plist) {
 		console.log(value)
 		txdata.nonce=value
 	})
+	console.log("lijitest===nonce")
+	console.log(txdata.nonce)
 	
     //txdata.nonce = web3.eth.getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
