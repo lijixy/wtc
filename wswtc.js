@@ -191,7 +191,7 @@ function promiseNonce(promisenonce) {
   web3.eth.getTransactionCount(promisenonce).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
-		return txdata.nonce=data
+		return data
 	})
 }
 
