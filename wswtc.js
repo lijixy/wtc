@@ -147,11 +147,12 @@ function loadTxData(plist) {
 	}
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-	var promisenonce = Promise.resolve(web3.eth.getTransactionCount(plist[2]));
-	promiseNonce(promisenonce).then(function(value){
-		console.log(value)
-		txdata.nonce=value
-	})
+	//var promisenonce = Promise.resolve(web3.eth.getTransactionCount(plist[2]));
+	//promiseNonce(promisenonce).then(function(value){
+	//	console.log(value)
+	//	txdata.nonce=value
+	//})
+	txdata.nonce=web3.eth.getTransactionCount(plist[2])
 	console.log("lijitest===nonce")
 	console.log(txdata.nonce)
 	
