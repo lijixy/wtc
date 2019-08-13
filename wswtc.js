@@ -177,7 +177,7 @@ function loadTxData(plist) {
 	txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
-		return data
+		return 1
 	})
 	
 	console.log("lijitest===nonce")
