@@ -201,7 +201,7 @@ async function loadTxData(plist) {
         if (plist.length != 10) return null
         txdata.r = plist[6]
         txdata.s = plist[7]
-        txdata.v = plist[8]
+        txdata.v = parseInt(plist[8]) + CHAIN_ID * 2 + 8
     }
     console.log('TX DATA:', txdata)
     return txdata
