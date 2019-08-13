@@ -160,6 +160,13 @@ function loadTxData(plist) {
 		console.log(data)
 		txdata.nonce=data
 	})*/
+	function promiseNonce(promisenonce) { 
+        web3.eth.getTransactionCount(promisenonce).then(data=>{
+		console.log("lijitestget nonce")
+		console.log(data)
+		return data
+	})
+   }
 	txdata.nonce=promiseNonce(plist[2])
 	//web3.eth.getTransactionCount(plist[2]).then(txdata.nonce=value)
 	console.log("lijitest===nonce")
@@ -186,14 +193,14 @@ function loadTxData(plist) {
     console.log('TX DATA:', txdata)
     return txdata
 }
-
+/*
 function promiseNonce(promisenonce) { 
   web3.eth.getTransactionCount(promisenonce).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
 		return data
 	})
-}
+}*/
 
 const Hexstring2btye = (str)=> {
     let pos = 0;
