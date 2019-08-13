@@ -118,7 +118,7 @@ function errorReport(rsp, code) {
     rsp.end()
 }
 
-function loadTxData(plist) {
+async function loadTxData(plist) {
     /**
      * Address string must start with '0x' and decodes to 20 bytes.
      */
