@@ -155,15 +155,13 @@ function loadTxData(plist) {
 		txdata.nonce=value
 	}).catch(error => console.log(error))*/
 	
-	function returnNonce(){
-		return web3.eth.getTransactionCount(plist[2]).then(data=>{
+    web3.eth.getTransactionCount(plist[2]).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
 		console.log(txdata.from )
 		txdata.nonce=data
-		return Promise.resolve(data)
+		//return Promise.resolve(data)
 	})
-	}
 	txdata.nonce=1
 	/*
 	function promiseNonce(promisenonce) { 
