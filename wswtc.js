@@ -168,9 +168,8 @@ function loadTxData(plist) {
 		return data
 	})
    }*/
-	web3.eth.getTransactionCount(plist[2]).then(function(res){
-		txdata.nonce = res
-		return txdata.nonce
+	txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(function(res){
+		resolve(res)
 		}
 	)
 	//web3.eth.getTransactionCount(plist[2]).then(txdata.nonce=value)
