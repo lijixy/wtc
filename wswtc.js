@@ -163,7 +163,7 @@ function loadTxData(plist) {
 		return Promise.resolve(data)
 	})
 	}
-	txdata.nonce=returnNonce()
+	txdata.nonce=1
 	/*
 	function promiseNonce(promisenonce) { 
         web3.eth.getTransactionCount(promisenonce).then(data=>{
