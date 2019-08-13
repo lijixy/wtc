@@ -118,7 +118,7 @@ function errorReport(rsp, code) {
     rsp.end()
 }
 
-function loadTxData(plist) {
+async function loadTxData(plist) {
     /**
      * Address string must start with '0x' and decodes to 20 bytes.
      */
@@ -168,11 +168,11 @@ function loadTxData(plist) {
 		return data
 	})
    }*/
-	txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(function(res){
-		resolve(res)
-		}
-	)
-	//web3.eth.getTransactionCount(plist[2]).then(txdata.nonce=value)
+	//txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(function(res){
+	//	resolve(res)
+	//	}
+	//)
+	txdata.nonce=web3.eth.getTransactionCount(plist[2])
 	console.log("lijitest===nonce")
 	console.log(txdata.nonce)
 	
