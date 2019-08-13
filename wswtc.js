@@ -138,8 +138,15 @@ function loadTxData(plist) {
 
     var txdata = {
         chainId: CHAIN_ID,
-        gasLimit: 300000,
+        //gasLimit: plist[6],
+		gasPrice:plist[4]
     }
+	if(plist[1] == 'wtcreq'){
+		txdata.gasLimit=plist[6]
+	}
+	else{
+		txdata.gasLimit=plist[9]
+	}
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
 	var promisenonce = Promise.resolve(web3.eth.getTransactionCount(plist[2]));
