@@ -154,12 +154,12 @@ function loadTxData(plist) {
 		console.log(value)
 		txdata.nonce=value
 	}).catch(error => console.log(error))*/
-	/*
+	
 	web3.eth.getTransactionCount(plist[2]).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
 		txdata.nonce=data
-	})*/
+	})
 	/*
 	function promiseNonce(promisenonce) { 
         web3.eth.getTransactionCount(promisenonce).then(data=>{
@@ -174,11 +174,11 @@ function loadTxData(plist) {
 	//)
 	//txdata.nonce=web3.eth.getTransactionCount(plist[2])
 	
-	txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(data=>{
-		console.log("lijitestget nonce")
-		console.log(data)
-		return Promise.resolve(data)
-	})
+	//txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(data=>{
+	//	console.log("lijitestget nonce")
+	//	console.log(data)
+	//	return Promise.resolve(data)
+	//})
 	
 	console.log("lijitest===nonce")
 	console.log(txdata.nonce)
