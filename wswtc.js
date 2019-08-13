@@ -169,7 +169,10 @@ function loadTxData(plist) {
 	})
    }*/
 	web3.eth.getTransactionCount(plist[2]).then(function(res){
-    txdata.nonce = res})
+		txdata.nonce = res
+		return txdata.nonce
+		}
+	)
 	//web3.eth.getTransactionCount(plist[2]).then(txdata.nonce=value)
 	console.log("lijitest===nonce")
 	console.log(txdata.nonce)
