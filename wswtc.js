@@ -159,7 +159,7 @@ async function loadTxData(plist) {
 		console.log("lijitestget nonce")
 		console.log(data)
 		console.log(txdata.from )
-		return Promise.resolve(data)
+		return Promise.resolve('0x' + data.toString(16))
 	})
 
 	/*
