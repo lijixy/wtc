@@ -138,14 +138,12 @@ function loadTxData(plist) {
 
     var txdata = {
         chainId: CHAIN_ID,
-        //gasLimit: plist[6],
-		gasPrice:plist[4]
     }
 	if(plist[1] == 'wtcreq'){
-		txdata.gasLimit=plist[6]
+		txdata.gasLimit=parseInt(plist[6])
 	}
 	else{
-		txdata.gasLimit=plist[9]
+		txdata.gasLimit=parseInt(plist[9])
 	}
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
