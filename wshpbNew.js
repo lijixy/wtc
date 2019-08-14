@@ -1,7 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * Ellipal
+ * Ellipal CyberMiles Connector
+ * 
+ * Ling LI <ling.li@ellipal.com>
+ * 
+ * ChangeLog
+ * 20181109: Functional on mainnet.
+ * 20181107: Functional on private testnet.
  */
 
 'use strict'
@@ -10,21 +16,26 @@
  * Configurables.
  */
 const TESTING = false
-const RPC_SERVICE = TESTING ? ? 'http://mainnet.hpb.io' : 'http://mainnet.hpb.io'
-const CHAIN_ID = TESTING ? 15 : 15
-const SERVER_PORT = 9521 // Connector service port
+const RPC_SERVICE = TESTING ? 'http://mainnet.hpb.io' : 'http://mainnet.hpb.io'
+const CHAIN_ID = TESTING ? 269 : 269
+const SERVER_PORT = 8545 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
 
 var web3_hpb = require('./lib/web3_hpb.js');
-const web3 = new web3_hpb(new web3_hpb.providers.HttpProvider(RPC_SERVICE))
+var web3_hpb = new web3_hpb();
+
+web3_hpb.setProvider(new web3_hpb.providers.HttpProvider(RPC_SERVICE));
+var balanceInfo=web3_hpb.hpb.getBalance("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d854")
+console.log(balanceInfo.toString(10))
+var nonceInfo=web3_hpb.hpb.getTransactionCount("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d854")
+console.log(nonceInfo)
+
+
 const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
 const BN = require('bn.js')
-
-var balanceInfo=web3.hpb.getBalance("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d854")
-console.log(balanceInfo.toString(10))
 
 /**
  * Error codes.
@@ -34,24 +45,24 @@ const ERR_OVERSPENDING = 40200 // user's balance is insufficient for the transac
 const ERR_APIDATA = 50300 // API returned unparseable message.
 const ERR_APINETWORK = 50400 // API site communication error.
 
-process.title = 'wtccon'
+process.title = 'cmtcon'
 
 const server = http.createServer(httpHandler).listen(SERVER_PORT, BIND_IP)
 console.log(server)
 server.setTimeout(60000) // 60s timeout
 
-async function httpHandler(clientReq, serverRsp) {
+function httpHandler(clientReq, serverRsp) {
     serverRsp.setHeader('Content-Type', 'text/plain')
     console.log(new Date().toISOString(), '[REQUEST]', clientReq.socket.remoteAddress, clientReq.url)
     var pathList = url.parse(clientReq.url).pathname.split('/')
 	console.log(pathList)
-    var txData = await loadTxData(pathList);
+    var txData = loadTxData(pathList);
 	console.log(txData)
     if (!txData) {
         badRequest(serverRsp)
         return
     }
-    if (pathList[1] == 'wtcreq') {
+    if (pathList[1] == 'hpbreq') {
 		console.log("liji---test")
         // Make a tx.
         var uTx = new ethtx(txData)
@@ -65,13 +76,11 @@ async function httpHandler(clientReq, serverRsp) {
         }, null, 2))
         serverRsp.statusCode = 200
         serverRsp.end()
-    } else if (pathList[1] == 'wtcsend') {
+    } else if (pathList[1] == 'hpbsend') {
         // Send a tx with signature.
         var sTx = new ethtx(txData)
-		console.log("lijitest--sendWTC")
-		console.log(sTx)
         var sTxStr = '0x' + sTx.serialize().toString('hex')
-        web3.eth.sendSignedTransaction(sTxStr, (err, hash) => {
+        web3.eth.sendRawTransaction(sTxStr, (err, hash) => {
             if (!err) {
                 // Success.
                 console.log(new Date().toISOString(), '[TX ID]', hash)
@@ -137,87 +146,37 @@ async function loadTxData(plist) {
         return true
     }
 
-    if (plist[1] != 'wtcreq' && plist[1] != 'wtcsend') return null
+    if (plist[1] != 'hpbreq' && plist[1] != 'hpbsend') return null
     if (plist.length < 6) return null
 
     var txdata = {
         chainId: CHAIN_ID,
+        gasLimit: '0x' + "100000000".toString(16),
     }
-	if(plist[1] == 'wtcreq'){
-		txdata.gasLimit=plist[6]
-	}
-	else{
-		txdata.gasLimit=plist[9]
-	}
     if (!checkAddr(plist[2])) return null
     txdata.from = plist[2]
-	/*
-	var promisenonce = Promise.resolve(web3.eth.getTransactionCount(plist[2]));
-	console.log(promisenonce)
-	promiseNonce(promisenonce).then(function(value){
-		console.log(value)
-		txdata.nonce=value
-	}).catch(error => console.log(error))*/
-	
-    txdata.nonce=await web3.eth.getTransactionCount(plist[2]).then(data=>{
-		console.log("lijitestget nonce")
-		console.log(data)
-		console.log(txdata.from )
-		return Promise.resolve('0x' + data.toString(16))
-	})
-
-	/*
-	function promiseNonce(promisenonce) { 
-        web3.eth.getTransactionCount(promisenonce).then(data=>{
-		console.log("lijitestget nonce")
-		console.log(data)
-		return data
-	})
-   }*/
-	//txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(function(res){
-	//	resolve(res)
-	//	}
-	//)
-	//txdata.nonce=web3.eth.getTransactionCount(plist[2])
-	
-	//txdata.nonce=web3.eth.getTransactionCount(plist[2]).then(data=>{
-	//	console.log("lijitestget nonce")
-	//	console.log(data)
-	//	return Promise.resolve(data)
-	//})
-	
-	console.log("lijitest===nonce")
+	console.log(plist[2])
+    txdata.nonce = "0x"+web3_hpb.hpb.getTransactionCount(plist[2]).toString(16)
 	console.log(txdata.nonce)
-	
-    //txdata.nonce = web3.eth.getTransactionCount(plist[2])
     if (!checkAddr(plist[3])) return null
     txdata.to = plist[3]
     txdata.gasPrice = plist[4]
-	console.log("lijitest--get--loadData")
-	console.log("txData",txdata)
     try {
         var big = new BN(plist[5], 10)
         txdata.value = '0x' + big.toString(16)
     } catch (e) {
         return null
     }
-    if (plist[1] == 'wtcsend') {
-        if (plist.length != 10) return null
+    if (plist[1] == 'hpbsend') {
+        if (plist.length != 9) return null
         txdata.r = plist[6]
         txdata.s = plist[7]
         txdata.v = parseInt(plist[8]) + CHAIN_ID * 2 + 8
     }
-    console.log('TX DATA:', txdata)
+    // console.log('TX DATA:', txdata)
     return txdata
 }
-/*
-function promiseNonce(promisenonce) { 
-  web3.eth.getTransactionCount(promisenonce).then(data=>{
-		console.log("lijitestget nonce")
-		console.log(data)
-		return data
-	})
-}*/
+
 
 const Hexstring2btye = (str)=> {
     let pos = 0;
