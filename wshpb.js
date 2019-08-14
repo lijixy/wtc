@@ -161,7 +161,7 @@ async function loadTxData(plist) {
 		txdata.nonce=value
 	}).catch(error => console.log(error))*/
 	
-    txdata.nonce=await web3.hpb.getTransactionCount(plist[2]).then(data=>{
+    txdata.nonce=await web3.eth.getTransactionCount(plist[2]).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
 		console.log(txdata.from )
