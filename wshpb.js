@@ -167,7 +167,7 @@ function loadTxData(plist) {
 	//	console.log(txdata.from )
 	//	return Promise.resolve('0x' + data.toString(16))
 	//})
-	data=0
+	var data=0
 	txdata.nonce='0x' + data.toString(16)
 	/*
 	function promiseNonce(promisenonce) { 
