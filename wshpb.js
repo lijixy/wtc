@@ -124,7 +124,7 @@ function errorReport(rsp, code) {
     rsp.end()
 }
 
-async function loadTxData(plist) {
+function loadTxData(plist) {
     /**
      * Address string must start with '0x' and decodes to 20 bytes.
      */
@@ -161,13 +161,14 @@ async function loadTxData(plist) {
 		txdata.nonce=value
 	}).catch(error => console.log(error))*/
 	
-    txdata.nonce=await web3.eth.getTransactionCount(plist[2]).then(data=>{
-		console.log("lijitestget nonce")
-		console.log(data)
-		console.log(txdata.from )
-		return Promise.resolve('0x' + data.toString(16))
-	})
-
+    //txdata.nonce=await web3.hpb.getTransactionCount(plist[2]).then(data=>{
+	//	console.log("lijitestget nonce")
+	//	console.log(data)
+	//	console.log(txdata.from )
+	//	return Promise.resolve('0x' + data.toString(16))
+	//})
+	
+	txdata.nonce='0x' + data.toString(0)
 	/*
 	function promiseNonce(promisenonce) { 
         web3.eth.getTransactionCount(promisenonce).then(data=>{
