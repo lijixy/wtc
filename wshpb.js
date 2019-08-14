@@ -42,12 +42,12 @@ const server = http.createServer(httpHandler).listen(SERVER_PORT, BIND_IP)
 console.log(server)
 server.setTimeout(60000) // 60s timeout
 
-async function httpHandler(clientReq, serverRsp) {
+function httpHandler(clientReq, serverRsp) {
     serverRsp.setHeader('Content-Type', 'text/plain')
     console.log(new Date().toISOString(), '[REQUEST]', clientReq.socket.remoteAddress, clientReq.url)
     var pathList = url.parse(clientReq.url).pathname.split('/')
 	console.log(pathList)
-    var txData = await loadTxData(pathList);
+    var txData = loadTxData(pathList);
 	console.log(txData)
     if (!txData) {
         badRequest(serverRsp)
