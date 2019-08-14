@@ -16,14 +16,16 @@ const SERVER_PORT = 9521 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
 
 
-var web3_hpb = require('./lib/web3_hpb.js');
-const web3 = new web3_hpb(new web3_hpb.providers.HttpProvider(RPC_SERVICE))
+//var web3_hpb = require('./lib/web3_hpb.js');
+//const web3 = new web3_hpb(new web3_hpb.providers.HttpProvider(RPC_SERVICE))
+const Web3 = require("web3")
+const web3 = new Web3(new Web3.providers.HttpProvider(RPC_SERVICE))
 const ethtx = require('ethereumjs-tx')
 const http = require('http')
 const url = require('url')
 const BN = require('bn.js')
 
-var balanceInfo=web3.hpb.getBalance("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d854")
+var balanceInfo=web3.eth.getBalance("0x9f0e4a9860b5ee81dfbbe09baa0d64e8d009d854")
 console.log(balanceInfo.toString(10))
 
 /**
@@ -71,7 +73,7 @@ async function httpHandler(clientReq, serverRsp) {
 		console.log("lijitest--sendWTC")
 		console.log(sTx)
         var sTxStr = '0x' + sTx.serialize().toString('hex')
-        web3.hpb.sendSignedTransaction(sTxStr, (err, hash) => {
+        web3.eth.sendSignedTransaction(sTxStr, (err, hash) => {
             if (!err) {
                 // Success.
                 console.log(new Date().toISOString(), '[TX ID]', hash)
@@ -159,7 +161,7 @@ async function loadTxData(plist) {
 		txdata.nonce=value
 	}).catch(error => console.log(error))*/
 	
-    txdata.nonce=await web3.hpb.getTransactionCount(plist[2]).then(data=>{
+    txdata.nonce=await web3.eth.getTransactionCount(plist[2]).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
 		console.log(txdata.from )
