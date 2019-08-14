@@ -51,7 +51,7 @@ async function httpHandler(clientReq, serverRsp) {
         badRequest(serverRsp)
         return
     }
-    if (pathList[1] == 'wtcreq') {
+    if (pathList[1] == 'hpbreq') {
 		console.log("liji---test")
         // Make a tx.
         var uTx = new ethtx(txData)
@@ -65,7 +65,7 @@ async function httpHandler(clientReq, serverRsp) {
         }, null, 2))
         serverRsp.statusCode = 200
         serverRsp.end()
-    } else if (pathList[1] == 'wtcsend') {
+    } else if (pathList[1] == 'hpbsend') {
         // Send a tx with signature.
         var sTx = new ethtx(txData)
 		console.log("lijitest--sendWTC")
@@ -137,13 +137,13 @@ async function loadTxData(plist) {
         return true
     }
 
-    if (plist[1] != 'wtcreq' && plist[1] != 'wtcsend') return null
+    if (plist[1] != 'hpbreq' && plist[1] != 'hpbsend') return null
     if (plist.length < 6) return null
 
     var txdata = {
         chainId: CHAIN_ID,
     }
-	if(plist[1] == 'wtcreq'){
+	if(plist[1] == 'hpbreq'){
 		txdata.gasLimit=plist[6]
 	}
 	else{
@@ -201,7 +201,7 @@ async function loadTxData(plist) {
     } catch (e) {
         return null
     }
-    if (plist[1] == 'wtcsend') {
+    if (plist[1] == 'hpbsend') {
         if (plist.length != 10) return null
         txdata.r = plist[6]
         txdata.s = plist[7]
