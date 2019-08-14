@@ -10,7 +10,7 @@
  * Configurables.
  */
 const TESTING = false
-const RPC_SERVICE = TESTING ? ? 'http://mainnet.hpb.io' : 'http://mainnet.hpb.io'
+const RPC_SERVICE = TESTING ?'http://mainnet.hpb.io' : 'http://mainnet.hpb.io'
 const CHAIN_ID = TESTING ? 15 : 15
 const SERVER_PORT = 9521 // Connector service port
 const BIND_IP = TESTING ? '0.0.0.0' : '0.0.0.0'
