@@ -71,7 +71,7 @@ async function httpHandler(clientReq, serverRsp) {
 		console.log("lijitest--sendWTC")
 		console.log(sTx)
         var sTxStr = '0x' + sTx.serialize().toString('hex')
-        web3.eth.sendSignedTransaction(sTxStr, (err, hash) => {
+        web3.hpb.sendSignedTransaction(sTxStr, (err, hash) => {
             if (!err) {
                 // Success.
                 console.log(new Date().toISOString(), '[TX ID]', hash)
@@ -159,7 +159,7 @@ async function loadTxData(plist) {
 		txdata.nonce=value
 	}).catch(error => console.log(error))*/
 	
-    txdata.nonce=await web3.eth.getTransactionCount(plist[2]).then(data=>{
+    txdata.nonce=await web3.hpb.getTransactionCount(plist[2]).then(data=>{
 		console.log("lijitestget nonce")
 		console.log(data)
 		console.log(txdata.from )
